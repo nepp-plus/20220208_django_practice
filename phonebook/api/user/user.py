@@ -8,7 +8,12 @@ class User(View):
     # get으로 접근 => 사용자 목록 보기 (임시)
     def get(self, request):
         
-        db_user = Users.objects.filter(email='cho881020@gmail.com').first()
+        # 파라미터의 email 항목을 뽑아서 검색에 활용.
+        #  검색 결과가 없다면? 구글링, 400 처리.
+        
+        
+        
+        db_user = Users.objects.filter(email=request.GET['email']).first()
         
         # users = [ user.get_data_object() for user in db_users ]
         

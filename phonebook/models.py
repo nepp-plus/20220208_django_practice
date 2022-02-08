@@ -10,6 +10,7 @@ class Contacts(models.Model):
 
     def get_data_object(self):
         data = {
+            'id': self.id,
             'name': self.name,
             'phone_num': self.phone_num,
             'email': self.email,
