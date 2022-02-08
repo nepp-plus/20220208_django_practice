@@ -19,6 +19,16 @@ class Users(models.Model):
     nickname = models.CharField(max_length=50)
     created_at = models.DateTimeField()
 
+    # DB 수행 결과 > dict로 변경 메쏘드
+    
+    def get_data_object(self):
+        data = {
+            'email': self.email,
+            'nickname': self.nickname,
+            'created_at': str(self.created_at)
+        }
+        return data
+
     class Meta:
         managed = False
         db_table = 'users'
