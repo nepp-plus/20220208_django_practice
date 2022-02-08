@@ -8,6 +8,16 @@ class Contacts(models.Model):
     memo = models.TextField()
     created_at = models.DateTimeField()
 
+    def get_data_object(self):
+        data = {
+            'name': self.name,
+            'phone_num': self.phone_num,
+            'email': self.email,
+            'memo': self.memo,
+            'created_at': str(self.created_at)
+        }
+        return data
+
     class Meta:
         managed = False
         db_table = 'contacts'
