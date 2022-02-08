@@ -17,12 +17,18 @@ class User(View):
         
         # users = [ user.get_data_object() for user in db_users ]
         
-        return JsonResponse( {
-            'code': 200,
-            'message': '임시 - GET 테스트',
-            # 'users': users
-            'user' : db_user.get_data_object()
-        } )
+        if db_user:
+            return JsonResponse( {
+                'code': 200,
+                'message': '임시 - GET 테스트',
+                # 'users': users
+                'user' : db_user.get_data_object()
+            } )
+        else:
+            return JsonResponse({
+                'code': 400,
+                'message': '해당 이메일을 사용하는 사람은 없습니다.'
+            }, status=400 )
         
     
     def post(self, request):
