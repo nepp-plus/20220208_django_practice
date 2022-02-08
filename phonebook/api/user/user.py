@@ -2,6 +2,7 @@ from django.views import View
 from django.http import JsonResponse
 
 from phonebook.models import Users
+from phonebook.serializer import UserSerializer
 
 class User(View):
     
@@ -18,11 +19,16 @@ class User(View):
         # users = [ user.get_data_object() for user in db_users ]
         
         if db_user:
+            
+            # 찾아낸 Users 객체를 > dict로 변환 : 만든 클래스 활용
+            
+            serializer =  UserSerializer(db_user)
+            
             return JsonResponse( {
                 'code': 200,
                 'message': '임시 - GET 테스트',
                 # 'users': users
-                'user' : db_user.get_data_object()
+                'user' : serializer.data
             } )
         else:
             return JsonResponse({
