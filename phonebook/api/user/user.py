@@ -1,10 +1,13 @@
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
 from django.views import View
 from django.http import JsonResponse
 
 from phonebook.models import Users
 from phonebook.serializer import UserSerializer
 
-class User(View):
+class User(APIView):
     
     # get으로 접근 => 사용자 목록 보기 (임시)
     def get(self, request):
@@ -24,14 +27,14 @@ class User(View):
             
             serializer =  UserSerializer(db_user)
             
-            return JsonResponse( {
+            return Response( {
                 'code': 200,
                 'message': '임시 - GET 테스트',
                 # 'users': users
                 'user' : serializer.data
             } )
         else:
-            return JsonResponse({
+            return Response({
                 'code': 400,
                 'message': '해당 이메일을 사용하는 사람은 없습니다.'
             }, status=400 )
