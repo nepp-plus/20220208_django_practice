@@ -1,6 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
+
 from django.views import View
 from django.http import JsonResponse
 
@@ -9,6 +12,17 @@ from phonebook.serializer import UserSerializer
 
 class User(APIView):
     
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter(
+                'email',
+                openapi.IN_QUERY,
+                description='필터에 적용해볼 이메일값',
+                required=True,
+                type=openapi.TYPE_STRING
+            ),
+        ]
+    )
     # get으로 접근 => 사용자 목록 보기 (임시)
     def get(self, request):
         
